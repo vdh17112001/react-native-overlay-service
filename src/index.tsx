@@ -1,3 +1,2 @@
-export function multiply(a: number, b: number): number {
-  return a * b;
-}
+export { OverlayRoot } from './context/Overlay/OverlayRoot'
+export { useOverlayStore } from './utils/useOverlayStore'
