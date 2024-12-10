@@ -5,7 +5,6 @@
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
-  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "import": {
@@ -45,7 +44,7 @@
     "clean": "del-cli lib",
     "prepare": "bob build",
     "release": "release-it",
-    "format": "prettier --write \"src/**/*.{js,ts,tsx,jsx,d.ts}\" && prettier --write \"dist/**/*.{d.ts,js,ts,tsx}\""
+    "format": "prettier --write \"src/**/*.{js,ts,tsx,jsx,d.ts}\""
   },
   "keywords": [
     "react-native",
@@ -90,8 +89,7 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*",
-    "zustand": "*"
+    "react-native": "*"
   },
   "workspaces": [
     "example"
@@ -201,5 +199,8 @@
     "languages": "js",
     "type": "library",
     "version": "0.45.1"
+  },
+  "dependencies": {
+    "zustand": "^5.0.2"
   }
 }
