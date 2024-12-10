@@ -8,11 +8,13 @@
     "allowUnusedLabels": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx",
-    "lib": ["ESNext"],
+    "jsx": "react-native",
+    "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "noEmit": true,
+    "lib": ["ESNext"],
+    "moduleResolution": "bundler",
+    // When True TS does not create any files
+    // "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,
@@ -24,7 +26,15 @@
     "resolvePackageJsonImports": false,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ESNext",
-    "verbatimModuleSyntax": true
-  }
+    // It only works when the module is not CommonJs
+    // "verbatimModuleSyntax": true
+    //add below properties to create d.ts file
+    "declarationMap": true,
+    "allowJs": true,
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "outDir": "./dist"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

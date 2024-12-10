@@ -5,6 +5,7 @@
   "source": "./src/index.tsx",
   "main": "./lib/commonjs/index.js",
   "module": "./lib/module/index.js",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "import": {
@@ -43,7 +44,8 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli lib",
     "prepare": "bob build",
-    "release": "release-it"
+    "release": "release-it",
+    "format": "prettier --write \"src/**/*.{js,ts,tsx,jsx,d.ts}\" && prettier --write \"dist/**/*.{d.ts,js,ts,tsx}\""
   },
   "keywords": [
     "react-native",
@@ -139,7 +141,8 @@
           "singleQuote": true,
           "tabWidth": 2,
           "trailingComma": "es5",
-          "useTabs": false
+          "useTabs": false,
+          "semi": false
         }
       ]
     }
