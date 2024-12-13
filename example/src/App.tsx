@@ -1,11 +1,9 @@
 import { useEffect } from 'react'
 import { View, StyleSheet, Button, Text, TouchableOpacity } from 'react-native'
-import { OverlayRoot, useOverlayStore } from 'react-native-overlay-service'
+import { OverlayRoot, useOverlay } from 'react-native-overlay-service'
 
 export default function App() {
-  const openOverlay = useOverlayStore((state) => state.openOverlay)
-  const closeOverlay = useOverlayStore((state) => state.closeOverlay)
-
+  const { openOverlay, closeAllOverlay, closeOverlay } = useOverlay()
   useEffect(() => {}, [])
   return (
     <View style={styles.container}>
@@ -39,11 +37,11 @@ export default function App() {
                 openOverlay(
                   <TouchableOpacity
                     onPress={() => {
-                      closeOverlay()
+                      closeAllOverlay()
                     }}
                     style={styles.content}
                   >
-                    <Text style={styles.textStyle}>Hello world! </Text>
+                    <Text style={styles.textStyle}>Close all! </Text>
                   </TouchableOpacity>,
                   {
                     type: 'modal',
@@ -57,7 +55,7 @@ export default function App() {
             </TouchableOpacity>,
             {
               type: 'actionsheet',
-              enableCloseWhenPressOutside: true,
+              enableCloseWhenPressOutside: false,
             }
           )
         }}
