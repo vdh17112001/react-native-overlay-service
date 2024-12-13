@@ -1,6 +1,6 @@
 # react-native-overlay-service
 
-overlay service
+Overlay service using **Zustand** to conveniently open Modal or Actionsheet
 
 ## Installation
 
@@ -12,15 +12,44 @@ npm install react-native-overlay-service
 yarn add react-native-overlay-service
 ```
 
-```sh
-pnpm add react-native-overlay-service
-```
-
 ## Usage
 
+#### Firstly
 
-## License
+Import and add `OverLayRoot` to App.tsx
+```
+...
+import { OverlayRoot } from 'react-native-overlay-service'
 
-MIT
+const App = () => {
 
+  return ( 
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerShown: false,
+            }}>
+            <Stack.Screen name="Home" component={AuthStack} />
+          </Stack.Navigator>
+        </NavigationContainer>
+
+       <OverlayRoot />  --> Add this
+
+      </SafeAreaProvider>
+  )
+}
+```
+
+And import `useOverlayStore` to use it
+
+```
+import { useOverlayStore } from 'react-native-overlay-service'
+```
+
+**1. Open**
+
+```
+
+```
 ---
