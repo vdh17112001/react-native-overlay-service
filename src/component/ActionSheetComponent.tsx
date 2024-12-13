@@ -1,7 +1,14 @@
-import { StyleSheet, Pressable, View } from 'react-native'
+import {
+  StyleSheet,
+  Pressable,
+  View,
+  Animated,
+  PanResponder,
+} from 'react-native'
 import type { OverlayComponent } from '../context/types/type'
 import { useOverlayStore } from '../utils/useOverlayStore'
 import { height, width } from '../utils/utils'
+import { useRef } from 'react'
 
 type Props = {
   v: OverlayComponent
@@ -11,6 +18,39 @@ type Props = {
 export const ActionSheetComponent = (props: Props) => {
   const { v, backgroundActionSheet } = props
   const close = useOverlayStore((state) => state.closeOverlay)
+
+  // Animated value for drag
+  const translateY = useRef(new Animated.Value(0)).current
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderMove: (_, gestureState) => {
+        if (gestureState.dy > 0) {
+          // Only swipe down is allowed
+          translateY.setValue(gestureState.dy)
+        }
+      },
+      onPanResponderRelease: (_, gestureState) => {
+        if (gestureState.dy > 100) {
+          // If the swipe down exceeds 100px, close the ActionSheet
+          Animated.timing(translateY, {
+            toValue: height,
+            duration: 200,
+            useNativeDriver: true,
+          }).start(() => close())
+        } else {
+          // Returns to original position if not swiped far enough
+          Animated.spring(translateY, {
+            toValue: 0,
+            useNativeDriver: true,
+          }).start()
+        }
+      },
+    })
+  ).current
+
   return (
     <Pressable
       onPress={() => {
@@ -20,15 +60,19 @@ export const ActionSheetComponent = (props: Props) => {
       }}
       style={styles.container}
     >
-      <Pressable
+      <Animated.View
+        {...panResponder.panHandlers} // Connect PanResponder
         style={[
-          { backgroundColor: backgroundActionSheet ?? 'white' },
+          {
+            transform: [{ translateY }],
+            backgroundColor: backgroundActionSheet ?? 'white',
+          },
           styles.contentContainer,
         ]}
       >
         <View style={styles.dash} />
         {v.component}
-      </Pressable>
+      </Animated.View>
     </Pressable>
   )
 }
