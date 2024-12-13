@@ -10,8 +10,6 @@ export default function App() {
   return (
     <View style={styles.container}>
       <OverlayRoot />
-      {/* <ActionSheetRoot /> */}
-
       <Button
         onPress={() => {
           openOverlay(
