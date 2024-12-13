@@ -34,22 +34,45 @@ const App = () => {
           </Stack.Navigator>
         </NavigationContainer>
 
-       <OverlayRoot />  --> Add this
+       <OverlayRoot />  <-- Add this
 
       </SafeAreaProvider>
   )
 }
 ```
 
-And import `useOverlayStore` to use it
+And import `useOverlay` to use it
 
 ```
-import { useOverlayStore } from 'react-native-overlay-service'
+import { useOverlay } from 'react-native-overlay-service'
+
+...
+//NOTE: Hooks can only be called at the top level of a function component or a custom hook
+const { openOverlay, closeAllOverlay, closeOverlay } = useOverlay()
+...
 ```
 
-**1. Open**
+### `openOverlay(component: React.ReactNode, type: 'modal' | 'actionsheet', enableCloseWhenPressOutside?: boolean): void`
 
-```
+`component` : The element that you want to display on the overlay
 
-```
+`type` : The type of overlay you want to use `'modal' | 'actionsheet'`
+
+`enableCloseWhenPressOutside` : Decide whether you want the overlay to close when pressed outside
+
+### `closeOverlay(): void`
+
+Close the current overlay
+
+### `closeAllOverlay(): void`
+
+Close all overlays
+
 ---
+
+## Example
+
+```
+yarn example android
+yarn example ios
+```
