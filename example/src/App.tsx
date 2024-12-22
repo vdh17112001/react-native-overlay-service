@@ -48,14 +48,29 @@ export default function App() {
         onPress={() => {
           openModal()
         }}
-      />
-
+      >
+        <Text>Open Modal</Text>
+      </TouchableOpacity>
       <TouchableOpacity
         style={{ width: 100, height: 100, backgroundColor: 'green' }}
         onPress={() => {
           openActionSheet()
         }}
-      />
+      >
+        <Text>Open ActionSheet</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{ width: 100, height: 100, backgroundColor: 'blue' }}
+        onPress={() => {}}
+      >
+        <Text>Open Toast</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{ width: 100, height: 100, backgroundColor: 'green' }}
+        onPress={() => {}}
+      >
+        <Text>Open Popup</Text>
+      </TouchableOpacity>
     </View>
   )
 }

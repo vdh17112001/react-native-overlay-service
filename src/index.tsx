@@ -1,3 +1,3 @@
 export { OverlayRoot } from './context/Overlay/OverlayRoot'
-export { useOverlayStore } from './utils/useOverlayStore'
-export { useOverlay } from './utils/useOverLay'
+export { useOverlayStore } from './context/hook/useOverlayStore'
+export { useOverlay } from './context/hook/useOverLay'
