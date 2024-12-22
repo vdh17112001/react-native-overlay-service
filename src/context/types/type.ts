@@ -6,7 +6,15 @@ export interface OverlayStoreTypes {
   closeAllOverlay: () => void
 }
 
-export interface OverlayComponent {
+export interface ActionSheetStoreTypes {
+  actionSheet: OverlayComponent[]
+  openActionSheet: (component: React.ReactNode, option: OptionOverlay) => void
+  ASOpenId: string[]
+  closeActionSheet: () => void
+  closeAllActionSheet: () => void
+}
+
+export type OverlayComponent = {
   id: string
   component: React.ReactNode
   enableCloseWhenPressOutside: boolean | undefined
@@ -14,6 +22,6 @@ export interface OverlayComponent {
 }
 
 export type OptionOverlay = {
-  type: OverlayComponent['type']
   enableCloseWhenPressOutside?: boolean
+  type: 'modal' | 'actionsheet'
 }

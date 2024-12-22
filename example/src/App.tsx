@@ -1,70 +1,65 @@
-import { useEffect } from 'react'
-import { View, StyleSheet, Button, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { OverlayRoot, useOverlay } from 'react-native-overlay-service'
 
 export default function App() {
-  const { openOverlay, closeAllOverlay, closeOverlay } = useOverlay()
-  useEffect(() => {}, [])
+  const { openOverlay, closeAllOverlay, closeOverlay } = useOverlay({
+    debounce: 200,
+  })
+
+  const openModal = () => {
+    openOverlay(
+      <TouchableOpacity
+        onPress={() => {
+          closeAllOverlay()
+        }}
+        style={styles.content}
+      >
+        <Text style={styles.textStyle}>Hello world! </Text>
+      </TouchableOpacity>,
+      {
+        enableCloseWhenPressOutside: true,
+        type: 'modal',
+      }
+    )
+  }
+
+  const openActionSheet = () => {
+    openOverlay(
+      <TouchableOpacity
+        onPress={() => {
+          closeOverlay('actionsheet')
+        }}
+        style={styles.content}
+      >
+        <Text style={styles.textStyle}>Hello action sheet! </Text>
+      </TouchableOpacity>,
+      {
+        enableCloseWhenPressOutside: true,
+        type: 'actionsheet',
+      }
+    )
+  }
+
   return (
     <View style={styles.container}>
-      <OverlayRoot />
-      <Button
+      <OverlayRoot animationType={'fade'} />
+      <TouchableOpacity
+        style={{ width: 100, height: 100, backgroundColor: 'red' }}
         onPress={() => {
-          openOverlay(
-            <TouchableOpacity
-              onPress={() => {
-                closeOverlay()
-              }}
-              style={styles.content}
-            >
-              <Text style={styles.textStyle}>Hello world! </Text>
-            </TouchableOpacity>,
-            {
-              type: 'modal',
-              enableCloseWhenPressOutside: true,
-            }
-          )
+          openModal()
         }}
-        title="open modal"
-        color="blue"
       />
 
-      <Button
+      <TouchableOpacity
+        style={{ width: 100, height: 100, backgroundColor: 'green' }}
         onPress={() => {
-          openOverlay(
-            <TouchableOpacity
-              onPress={() => {
-                openOverlay(
-                  <TouchableOpacity
-                    onPress={() => {
-                      closeAllOverlay()
-                    }}
-                    style={styles.content}
-                  >
-                    <Text style={styles.textStyle}>Close all! </Text>
-                  </TouchableOpacity>,
-                  {
-                    type: 'modal',
-                    enableCloseWhenPressOutside: true,
-                  }
-                )
-              }}
-              style={styles.content}
-            >
-              <Text style={styles.textStyle}>Hello action sheet! </Text>
-            </TouchableOpacity>,
-            {
-              type: 'actionsheet',
-              enableCloseWhenPressOutside: false,
-            }
-          )
+          openActionSheet()
         }}
-        title="open actionsheet"
-        color="blue"
       />
     </View>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -74,8 +69,9 @@ const styles = StyleSheet.create({
   },
   content: {
     width: 200,
-    height: 200,
+    height: 600,
     backgroundColor: 'blue',
+    justifyContent: 'flex-end',
   },
   textStyle: {
     fontSize: 20,

@@ -1,7 +1,7 @@
 import { StyleSheet, Pressable } from 'react-native'
 import type { OverlayComponent } from '../context/types/type'
-import { useOverlayStore } from '../utils/useOverlayStore'
 import { height, width } from '../utils/utils'
+import modalRef from '../context/ref/modalRef'
 
 type Props = {
   v: OverlayComponent
@@ -9,14 +9,12 @@ type Props = {
 
 export const ModalComponent = (props: Props) => {
   const { v } = props
-  const close = useOverlayStore((state) => state.closeOverlay)
 
   return (
     <Pressable
-      key={v.id}
       onPress={() => {
         if (v.enableCloseWhenPressOutside) {
-          close()
+          modalRef.current?.close()
         }
       }}
       style={styles.container}
