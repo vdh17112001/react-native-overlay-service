@@ -1,7 +1,7 @@
-import modalRef from '../context/ref/modalRef'
-import { OverlayComponent } from '../context/types/type'
+import modalRef from '../ref/modalRef'
+import { OverlayComponent } from '../types/type'
 import { useOverlayStore } from './useOverlayStore'
-import actionSheetRef from '../context/ref/actionSheetRef'
+import actionSheetRef from '../ref/actionSheetRef'
 
 let debounceOpen: NodeJS.Timeout | undefined
 let debounceClose: NodeJS.Timeout | undefined
