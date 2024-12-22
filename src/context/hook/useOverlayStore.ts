@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import type { OverlayStoreTypes, OptionOverlay } from '../context/types/type'
+import type { OverlayStoreTypes, OptionOverlay } from '../types/overlayTypes'
 
 export const useOverlayStore = create<OverlayStoreTypes>((set) => ({
   modals: [],

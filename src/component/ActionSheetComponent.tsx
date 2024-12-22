@@ -5,7 +5,7 @@ import {
   Animated,
   PanResponder,
 } from 'react-native'
-import type { OverlayComponent } from '../context/types/type'
+import type { OverlayComponent } from '../context/types/overlayTypes'
 import { height, width } from '../utils/utils'
 import { useRef } from 'react'
 import actionSheetRef from '../context/ref/actionSheetRef'

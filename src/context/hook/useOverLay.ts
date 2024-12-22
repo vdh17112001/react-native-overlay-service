@@ -1,5 +1,5 @@
 import modalRef from '../ref/modalRef'
-import { OverlayComponent } from '../types/type'
+import { OverlayComponent } from '../types/overlayTypes'
 import { useOverlayStore } from './useOverlayStore'
 import actionSheetRef from '../ref/actionSheetRef'
 

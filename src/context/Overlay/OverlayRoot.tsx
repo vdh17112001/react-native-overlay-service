@@ -1,5 +1,5 @@
 import { useOverlayStore } from '../../context/hook/useOverlayStore'
-import type { OverlayComponent } from '../types/type'
+import type { OverlayComponent } from '../types/overlayTypes'
 import { ModalComponent } from '../../component/ModalComponent'
 import { ActionSheetComponent } from '../../component/ActionSheetComponent'
 import { OverlayView, OverlayViewProps } from '../../component/OverlayView'
