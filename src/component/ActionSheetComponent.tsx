@@ -6,9 +6,9 @@ import {
   PanResponder,
 } from 'react-native'
 import type { OverlayComponent } from '../context/types/type'
-import { useOverlayStore } from '../utils/useOverlayStore'
 import { height, width } from '../utils/utils'
 import { useRef } from 'react'
+import actionSheetRef from '../context/ref/actionSheetRef'
 
 type Props = {
   v: OverlayComponent
@@ -17,7 +17,6 @@ type Props = {
 
 export const ActionSheetComponent = (props: Props) => {
   const { v, backgroundActionSheet } = props
-  const close = useOverlayStore((state) => state.closeOverlay)
 
   // Animated value for drag
   const translateY = useRef(new Animated.Value(0)).current
@@ -35,11 +34,7 @@ export const ActionSheetComponent = (props: Props) => {
       onPanResponderRelease: (_, gestureState) => {
         if (gestureState.dy > 100) {
           // If the swipe down exceeds 100px, close the ActionSheet
-          Animated.timing(translateY, {
-            toValue: height,
-            duration: 200,
-            useNativeDriver: true,
-          }).start(() => close())
+          swipeDown()
         } else {
           // Returns to original position if not swiped far enough
           Animated.spring(translateY, {
@@ -51,11 +46,20 @@ export const ActionSheetComponent = (props: Props) => {
     })
   ).current
 
+  const swipeDown = () => {
+    actionSheetRef.current?.close()
+    Animated.timing(translateY, {
+      toValue: height,
+      duration: 200,
+      useNativeDriver: true,
+    }).start()
+  }
+
   return (
     <Pressable
       onPress={() => {
         if (v.enableCloseWhenPressOutside) {
-          close()
+          swipeDown()
         }
       }}
       style={styles.container}
