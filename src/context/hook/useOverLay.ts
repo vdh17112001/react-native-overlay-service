@@ -1,6 +1,6 @@
 import modalRef from '../ref/modalRef'
 import { OverlayComponent } from '../types/overlayTypes'
-import { useOverlayStore } from './useOverlayStore'
+import { useOverlayStore } from '../store/useOverlayStore'
 import actionSheetRef from '../ref/actionSheetRef'
 
 let debounceOpen: NodeJS.Timeout | undefined

@@ -1,4 +1,4 @@
-import { useOverlayStore } from '../../context/hook/useOverlayStore'
+import { useOverlayStore } from '../store/useOverlayStore'
 import type { OverlayComponent } from '../types/overlayTypes'
 import { ModalComponent } from '../../component/ModalComponent'
 import { ActionSheetComponent } from '../../component/ActionSheetComponent'

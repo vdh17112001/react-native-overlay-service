@@ -6,7 +6,7 @@ import React, {
 } from 'react'
 import { Animated, StyleSheet } from 'react-native'
 import { height, width } from '../utils/utils'
-import { useOverlayStore } from '../context/hook/useOverlayStore'
+import { useOverlayStore } from '../context/store/useOverlayStore'
 
 export interface OverlayViewProps {
   children: React.ReactNode
