@@ -44,6 +44,7 @@ const App = () => {
 
 ### `useOverlay({ debounce: number }) : UseOverlayReturn`
 
+#### Type
 ```
 type UseOverlayReturn = {
   openOverlay: (
