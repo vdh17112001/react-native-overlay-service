@@ -1,17 +1,9 @@
-export interface OverlayStoreTypes {
+export interface OverlayStoreInterface {
   modals: OverlayComponent[]
   openOverlay: (component: React.ReactNode, option: OptionOverlay) => void
   modalOpenId: string[]
   closeOverlay: () => void
   closeAllOverlay: () => void
-}
-
-export interface ActionSheetStoreTypes {
-  actionSheet: OverlayComponent[]
-  openActionSheet: (component: React.ReactNode, option: OptionOverlay) => void
-  ASOpenId: string[]
-  closeActionSheet: () => void
-  closeAllActionSheet: () => void
 }
 
 export type OverlayComponent = {

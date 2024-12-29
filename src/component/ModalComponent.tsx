@@ -1,5 +1,5 @@
 import { StyleSheet, Pressable } from 'react-native'
-import type { OverlayComponent } from '../context/types/type'
+import type { OverlayComponent } from '../context/types/overlayTypes'
 import { height, width } from '../utils/utils'
 import modalRef from '../context/ref/modalRef'
 

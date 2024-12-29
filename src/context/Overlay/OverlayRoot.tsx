@@ -1,5 +1,5 @@
-import { useOverlayStore } from '../../utils/useOverlayStore'
-import type { OverlayComponent } from '../types/type'
+import { useOverlayStore } from '../store/useOverlayStore'
+import type { OverlayComponent } from '../types/overlayTypes'
 import { ModalComponent } from '../../component/ModalComponent'
 import { ActionSheetComponent } from '../../component/ActionSheetComponent'
 import { OverlayView, OverlayViewProps } from '../../component/OverlayView'

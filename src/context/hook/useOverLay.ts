@@ -1,15 +1,27 @@
-import modalRef from '../context/ref/modalRef'
-import { OverlayComponent } from '../context/types/type'
-import { useOverlayStore } from './useOverlayStore'
-import actionSheetRef from '../context/ref/actionSheetRef'
+import modalRef from '../ref/modalRef'
+import { OverlayComponent } from '../types/overlayTypes'
+import { useOverlayStore } from '../store/useOverlayStore'
+import actionSheetRef from '../ref/actionSheetRef'
 
 let debounceOpen: NodeJS.Timeout | undefined
 let debounceClose: NodeJS.Timeout | undefined
 
-type HookTypes = {
+interface HookTypes {
   debounce: number
 }
-export const useOverlay = (props: HookTypes) => {
+
+export type UseOverlayReturn = {
+  openOverlay: (
+    component: OverlayComponent['component'],
+    option: {
+      type: OverlayComponent['type']
+      enableCloseWhenPressOutside?: boolean
+    }
+  ) => void
+  closeOverlay: (type: OverlayComponent['type']) => void
+  closeAllOverlay: () => void
+}
+export const useOverlay = (props: HookTypes): UseOverlayReturn => {
   const { debounce = 200 } = props
   const open = useOverlayStore((state) => state.openOverlay)
   const closeAll = useOverlayStore((state) => state.closeAllOverlay)

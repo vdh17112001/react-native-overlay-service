@@ -1,10 +1,43 @@
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { OverlayRoot, useOverlay } from 'react-native-overlay-service'
+import {
+  OverlayRoot,
+  ToastRoot,
+  useOverlay,
+  useToast,
+} from 'react-native-overlay-service'
+import { ToastComponentTypes } from '../../src/context/types/toastTypes'
 
 export default function App() {
   const { openOverlay, closeAllOverlay, closeOverlay } = useOverlay({
     debounce: 200,
   })
+
+  const { showToastWithMessage } = useToast({ timeToHide: 2000 })
+
+  const Touch = ({
+    text,
+    bg,
+    onPress,
+  }: {
+    text: string
+    bg: string
+    onPress: () => void
+  }) => {
+    return (
+      <TouchableOpacity
+        style={{
+          width: 100,
+          height: 100,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: bg,
+        }}
+        onPress={onPress}
+      >
+        <Text>{text}</Text>
+      </TouchableOpacity>
+    )
+  }
 
   const openModal = () => {
     openOverlay(
@@ -14,7 +47,7 @@ export default function App() {
         }}
         style={styles.content}
       >
-        <Text style={styles.textStyle}>Hello world! </Text>
+        <Text style={styles.textStyle}>Hello world!</Text>
       </TouchableOpacity>,
       {
         enableCloseWhenPressOutside: true,
@@ -40,20 +73,70 @@ export default function App() {
     )
   }
 
+  const ToastSomething = (type: ToastComponentTypes['type']) => {
+    const onPress = (v: ToastComponentTypes) => {
+      console.log(v)
+    }
+    showToastWithMessage(type, 'Hello world!', {
+      usePress: false,
+      onPress: onPress,
+    })
+  }
+
   return (
     <View style={styles.container}>
       <OverlayRoot animationType={'fade'} />
-      <TouchableOpacity
-        style={{ width: 100, height: 100, backgroundColor: 'red' }}
+      <ToastRoot />
+      <Touch
+        bg="green"
+        text="Open Modal"
         onPress={() => {
           openModal()
         }}
       />
-
-      <TouchableOpacity
-        style={{ width: 100, height: 100, backgroundColor: 'green' }}
+      <Touch
+        bg="blue"
+        text="Open ActionSheet"
         onPress={() => {
           openActionSheet()
+        }}
+      />
+
+      <View style={{ width: 400, height: 100, flexDirection: 'row' }}>
+        <Touch
+          bg="green"
+          text="Open success"
+          onPress={() => {
+            ToastSomething('success')
+          }}
+        />
+        <Touch
+          bg="red"
+          text="Open err"
+          onPress={() => {
+            ToastSomething('error')
+          }}
+        />
+        <Touch
+          bg="blue"
+          text="Open info"
+          onPress={() => {
+            ToastSomething('info')
+          }}
+        />
+        <Touch
+          bg="yellow"
+          text="Open warn"
+          onPress={() => {
+            ToastSomething('warning')
+          }}
+        />
+      </View>
+      <Touch
+        bg="white"
+        text="Open no icon"
+        onPress={() => {
+          ToastSomething('noicon')
         }}
       />
     </View>

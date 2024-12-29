@@ -1,7 +1,10 @@
 import { create } from 'zustand'
-import type { OverlayStoreTypes, OptionOverlay } from '../context/types/type'
+import type {
+  OverlayStoreInterface,
+  OptionOverlay,
+} from '../types/overlayTypes'
 
-export const useOverlayStore = create<OverlayStoreTypes>((set) => ({
+export const useOverlayStore = create<OverlayStoreInterface>((set) => ({
   modals: [],
   modalOpenId: [],
   openOverlay: (component: React.ReactNode, option: OptionOverlay) =>
