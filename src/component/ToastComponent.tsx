@@ -48,6 +48,7 @@ export const ToastComponent = (props: Props) => {
       warning: warn,
       error: err,
       info: infor,
+      noicon: null,
     }
     return {
       title: titleToast[idx],
@@ -62,7 +63,7 @@ export const ToastComponent = (props: Props) => {
   } = getTypeToast()
 
   const usePress = v.option?.usePress ?? true
-  const showIcon = v.option?.showIcon ?? true
+  const showIcon = v.type !== 'noicon'
 
   return (
     <TouchableOpacity
@@ -71,7 +72,7 @@ export const ToastComponent = (props: Props) => {
       }}
       disabled={!usePress}
       onLayout={onLayout}
-      style={[{ bottom: bottom, shadowColor: 'black' }]}
+      style={[styles.container, { bottom: bottom, shadowColor: 'black' }]}
     >
       {showIcon && (
         <View style={[styles.barColor, { backgroundColor: toast.color }]} />
@@ -82,8 +83,16 @@ export const ToastComponent = (props: Props) => {
         </View>
       )}
 
-      <View style={[styles.content, { width: showIcon ? '73%' : '93%' }]}>
-        <Text style={styles.textTitle}>{toast.title}</Text>
+      <View
+        style={[
+          styles.content,
+          {
+            width: showIcon ? '73%' : '93%',
+            justifyContent: showIcon ? 'flex-start' : 'center',
+          },
+        ]}
+      >
+        {showIcon && <Text style={styles.textTitle}>{toast.title}</Text>}
         <Text
           numberOfLines={2}
           style={[{ fontSize: Platform.OS === 'ios' ? 14 : 16 }, styles.text]}
@@ -103,6 +112,8 @@ const styles = StyleSheet.create({
     zIndex: 9999,
     width: width * 0.85,
     height: height * 0.1,
+    alignItems: 'center',
+    flexDirection: 'row',
     shadowRadius: border,
     shadowOffset: {
       width: 2,
@@ -110,8 +121,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 2,
     shadowColor: 'black',
-    alignItems: 'center',
-    flexDirection: 'row',
+    elevation: 2,
   },
   text: {
     fontWeight: '600',

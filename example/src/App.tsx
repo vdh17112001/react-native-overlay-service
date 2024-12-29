@@ -12,7 +12,7 @@ export default function App() {
     debounce: 200,
   })
 
-  const { showToastWithMessage } = useToast({ timeToHide: 5000 })
+  const { showToastWithMessage } = useToast({ timeToHide: 2000 })
 
   const Touch = ({
     text,
@@ -74,18 +74,19 @@ export default function App() {
   }
 
   const ToastSomething = (type: ToastComponentTypes['type']) => {
-    const test = (v: ToastComponentTypes) => {
-      console.log('#Hoang: ', v)
+    const onPress = (v: ToastComponentTypes) => {
+      console.log(v)
     }
-    showToastWithMessage(type, 'Hello', {
-      showIcon: true,
-      usePress: true,
-      onPress: test,
+    showToastWithMessage(type, 'Hello world!', {
+      usePress: false,
+      onPress: onPress,
     })
   }
 
   return (
     <View style={styles.container}>
+      <OverlayRoot animationType={'fade'} />
+      <ToastRoot />
       <Touch
         bg="green"
         text="Open Modal"
@@ -131,9 +132,13 @@ export default function App() {
           }}
         />
       </View>
-      <Touch bg="pink" text="Open Popup" onPress={() => {}} />
-      <OverlayRoot animationType={'fade'} />
-      <ToastRoot />
+      <Touch
+        bg="white"
+        text="Open no icon"
+        onPress={() => {
+          ToastSomething('noicon')
+        }}
+      />
     </View>
   )
 }

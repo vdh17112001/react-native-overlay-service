@@ -14,12 +14,11 @@ export interface ToastStoreInterface {
 export type OptionToast = {
   usePress?: boolean
   onPress?: (v: ToastComponentTypes) => void
-  showIcon?: boolean
 }
 export type ToastComponentTypes = {
   id: string
   component?: React.ReactNode
-  type: 'warning' | 'error' | 'success' | 'info'
+  type: 'warning' | 'error' | 'success' | 'info' | 'noicon'
   message?: string
   option?: OptionToast
 }

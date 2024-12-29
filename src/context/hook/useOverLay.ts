@@ -6,10 +6,22 @@ import actionSheetRef from '../ref/actionSheetRef'
 let debounceOpen: NodeJS.Timeout | undefined
 let debounceClose: NodeJS.Timeout | undefined
 
-type HookTypes = {
+interface HookTypes {
   debounce: number
 }
-export const useOverlay = (props: HookTypes) => {
+
+export type UseOverlayReturn = {
+  openOverlay: (
+    component: OverlayComponent['component'],
+    option: {
+      type: OverlayComponent['type']
+      enableCloseWhenPressOutside?: boolean
+    }
+  ) => void
+  closeOverlay: (type: OverlayComponent['type']) => void
+  closeAllOverlay: () => void
+}
+export const useOverlay = (props: HookTypes): UseOverlayReturn => {
   const { debounce = 200 } = props
   const open = useOverlayStore((state) => state.openOverlay)
   const closeAll = useOverlayStore((state) => state.closeAllOverlay)

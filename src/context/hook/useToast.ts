@@ -5,8 +5,16 @@ interface HookProps {
   timeToHide?: number
 }
 
-export const useToast = (props?: HookProps) => {
-  const { timeToHide } = props || {}
+export type UseToastReturn = {
+  showToastWithMessage: (
+    types: ToastComponentTypes['type'],
+    message: string,
+    option?: OptionToast
+  ) => void
+}
+
+export const useToast = (props?: HookProps): UseToastReturn => {
+  const { timeToHide = 2000 } = props || {}
   const showToast = useToastStore((state) => state.showToast)
   const hideToast = useToastStore((state) => state.hideToast)
 
@@ -19,14 +27,6 @@ export const useToast = (props?: HookProps) => {
     hide()
   }
 
-  const showToastWithComponent = (
-    types: ToastComponentTypes['type'],
-    component: React.ReactNode
-  ) => {
-    showToast(types, component)
-    hide()
-  }
-
   const hide = () => {
     setTimeout(() => {
       hideToast()
@@ -34,8 +34,6 @@ export const useToast = (props?: HookProps) => {
   }
 
   return {
-    hideToast,
     showToastWithMessage,
-    showToastWithComponent,
   }
 }
